@@ -13,8 +13,7 @@
 ## 프로젝트 목표
 
 - 사용자가 `posts/` 폴더에 `.md` 파일을 넣고 `posts/manifest.json`에 등록하면, 별도 빌드 없이 브라우저에서 목록 페이지와 개별 글 페이지로 볼 수 있다.
-- 디자인은 **깔끔하고 가독성 중심**이다 (넓은 줄 간격, 적절한 본문 폭 max-width, 읽기 편한 폰트 크기).
-- **다크 모드**를 지원한다 (시스템 설정 자동 감지 `prefers-color-scheme` + 수동 토글 버튼, 선택은 `localStorage`에 저장).
+- 디자인은 **사이버펑크/신스웨이브 네온 테마**로 고정한다 — 검은 배경 + 시안/마젠타/퍼플 네온 컬러 포인트, 글로우 효과. 라이트/다크 토글은 없다(항상 이 테마 하나만 존재).
 - **모바일 반응형**: 작은 화면에서도 레이아웃이 깨지지 않고 터치 UI로 잘 보인다.
 
 ## 현재 구현 상태
@@ -22,8 +21,9 @@
 - `posts/manifest.json`에 글 4개 등록됨: `dev-productivity-habits`, `today-i-learned`, `hello-world`, `markdown-cheatsheet`.
 - 목록 페이지 검색(제목/요약/태그 + 본문 백그라운드 캐시)·태그 필터·URL 쿼리 동기화(`?tag=`, `?q=`) 구현 완료.
 - 상세 페이지 렌더링, 태그 배지, XSS 이스케이프 처리 구현 완료.
-- 다크모드 토글(`js/theme.js`) — 초기 테마는 각 HTML `<head>`의 인라인 스크립트가 페인트 이전에 적용해 깜빡임(FOUC)을 방지하고, `theme.js`는 토글 버튼 동작만 담당.
-- 코드 문법 강조(`js/highlight.js`) — 현재 `define()` 6회 호출로 `js/ts`, `python`, `bash/sh`, `json`, `css`, `html` 6개 언어 지원.
+- **다크/라이트 토글 없음**: `css/style.css`의 `:root`에 네온 팔레트가 고정값으로 정의되어 있다. 과거에 있던 `js/theme.js`, FOUC 방지 인라인 스크립트, 토글 버튼은 모두 제거됨. 새로 라이트 모드를 요청받기 전까지 다시 추가하지 않는다.
+- 목록 페이지는 카드 **그리드 레이아웃**(`repeat(auto-fill, minmax(280px, 1fr))`)이며, 카드마다 시안/마젠타/퍼플 네온을 순환 적용(`nth-child(3n+…)`)해 hover 시 해당 색으로 글로우.
+- 코드 문법 강조(`js/highlight.js`) — 현재 `define()` 6회 호출로 `js/ts`, `python`, `bash/sh`, `json`, `css`, `html` 6개 언어 지원. 토큰 색상은 네온 팔레트로 매핑됨(`--code-*` 변수).
 - `feed.xml`은 `tools/generate-feed.js`로 수동 생성된 정적 RSS 파일. 글 추가/수정 후 재실행 필요.
 - git 저장소 구성됨 (`main` 브랜치, origin과 동기화).
 - `README.md`에 로컬 서버 실행 방법 안내(반드시 `python -m http.server` 등 정적 서버로 열 것 — `file://`는 CORS 때문에 동작 안 함).
@@ -38,7 +38,6 @@ md-blog/
 ├── css/
 │   └── style.css       # 전체 스타일 (CSS 변수로 라이트/다크 테마 정의)
 ├── js/
-│   ├── theme.js        # 다크모드 토글 공용 로직
 │   ├── main.js         # 목록 페이지 로직 (manifest 로드, 검색, 태그 필터, 카드 렌더링)
 │   ├── post.js          # 상세 페이지 로직 (md 파일 fetch → 파싱 → 렌더링, 태그 배지)
 │   ├── markdown.js     # 마크다운 → HTML 변환 함수 (직접 구현)
@@ -71,8 +70,7 @@ md-blog/
 
 1. **목록 페이지 (`index.html` + `main.js`)**
    - `posts/manifest.json`을 `fetch`로 읽어온다.
-   - 날짜 최신순 정렬 후 카드 형태로 렌더링 (제목, 날짜, 요약, 태그 배지).
-   - 다크모드 토글 버튼 상태를 관리하고 `<html data-theme="dark|light">` 속성으로 반영.
+   - 날짜 최신순 정렬 후 카드 그리드 형태로 렌더링 (제목, 날짜, 요약, 태그 배지).
    - **태그 필터**: 전체 글의 `tags`를 모아 칩 버튼으로 렌더링. 클릭 시 `?tag=` 쿼리로 필터링하고 `history.replaceState`로 URL에 반영(새로고침/공유 시 유지).
    - **검색**: 검색창 입력(디바운스)마다 title/summary/tags를 즉시 매칭. 백그라운드로 모든 글의 `.md` 원문을 `fetch`해 `bodyCache`(slug → 소문자 원문)를 채우고, 캐시가 준비되면 본문 텍스트도 검색 대상에 포함한다. 검색어도 `?q=` 쿼리로 반영. 태그 필터와는 AND 조건으로 결합.
 
@@ -100,11 +98,15 @@ md-blog/
 
 ## 디자인 가이드라인
 
-- **색상**: CSS 커스텀 프로퍼티(`--bg`, `--text`, `--accent`, `--border` 등)로 라이트/다크 테마를 정의하고, `[data-theme="dark"]` 선택자로 값만 교체한다. `prefers-color-scheme: dark` 미디어쿼리를 기본값으로 두고, 사용자가 토글하면 `data-theme`과 `localStorage` 값이 우선한다.
-- **타이포그래피**: 본문은 시스템 폰트 스택(`-apple-system, "Segoe UI", "Malgun Gothic", sans-serif` 등) 사용. 본문 폭은 `max-width: 680~760px` 정도로 제한해 가독성 확보. `line-height`는 1.6~1.8.
-- **레이아웃**: Flexbox/Grid만으로 구성. 모바일 우선(mobile-first)으로 작성하고 `@media (min-width: 768px)` 등으로 넓은 화면 스타일을 추가하는 방식을 기본으로 한다.
+- **테마**: 사이버펑크/신스웨이브 네온, 라이트 모드 없이 고정. `css/style.css`의 `:root`에 정의된 CSS 커스텀 프로퍼티만 사용한다.
+  - `--bg`(딥블랙), `--bg-secondary`/`--bg-elevated`(카드·헤더용 약간 밝은 톤), `--text`(밝은 회백색 본문), `--text-secondary`(무채색 보조 텍스트)
+  - 네온 포인트: `--neon-cyan`, `--neon-pink`, `--neon-purple`, `--neon-green`, `--neon-yellow` — 헤딩/링크/hover/포커스 글로우(`text-shadow`, `box-shadow`, `filter: drop-shadow`)에 사용
+  - 새 색을 추가할 때도 반드시 `:root` 변수로 선언하고, 하드코딩된 색상값을 컴포넌트 CSS에 직접 쓰지 않는다.
+- **글로우 사용 원칙**: 모든 텍스트/보더에 글로우를 남발하지 않는다. 헤딩, 링크 hover, 포커스 상태, 카드 hover처럼 상호작용/강조가 필요한 지점에만 적용해 가독성을 해치지 않는다.
+- **타이포그래피**: 본문은 시스템 폰트 스택(`-apple-system, "Segoe UI", "Malgun Gothic", sans-serif` 등) 유지, 코드/메타 정보(날짜, 태그, 검색창)는 모노스페이스 폰트로 터미널 느낌을 준다. 본문(`post-content`) 폭은 `max-width: 720px` 정도로 제한해 가독성 확보. `line-height`는 1.6~1.8.
+- **레이아웃**: Flexbox/Grid만으로 구성. 목록 페이지는 `grid-template-columns: repeat(auto-fill, minmax(280px, 1fr))` 카드 그리드. 모바일 우선(mobile-first)으로 작성하고 `@media (min-width: 768px)` 등으로 넓은 화면 스타일을 추가하는 방식을 기본으로 한다.
 - **반응형 기준점(참고)**: `~480px`(작은 모바일), `768px`(태블릿), `1024px`(데스크톱).
-- **접근성**: 다크모드에서도 명도 대비(WCAG AA 이상)를 유지하고, 토글 버튼에는 `aria-label`을 붙인다.
+- **접근성**: 네온 텍스트/보더도 배경 대비 WCAG AA 이상을 유지해야 한다(특히 `--text-secondary`처럼 채도 낮은 색은 대비를 확인할 것). 순수 장식 요소(배경 격자 패턴 등)는 낮은 투명도로 본문 가독성을 해치지 않게 유지한다.
 
 ## 코딩 컨벤션
 

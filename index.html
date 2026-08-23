@@ -5,21 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>md-blog</title>
 <link rel="alternate" type="application/rss+xml" title="md-blog" href="feed.xml">
-<script>
-  // 페인트 이전에 저장된 테마를 적용해 깜빡임(FOUC)을 방지한다.
-  (function () {
-    var t = localStorage.getItem("md-blog-theme");
-    if (t === "light" || t === "dark") {
-      document.documentElement.setAttribute("data-theme", t);
-    }
-  })();
-</script>
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
   <header class="site-header">
     <a href="index.html" class="site-title">md-blog</a>
-    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="테마 전환">🌙</button>
   </header>
 
   <main>
@@ -41,7 +31,6 @@
 
   <footer>md-blog &middot; 마크다운으로 쓰고 정적으로 배포합니다 &middot; <a href="feed.xml">RSS</a></footer>
 
-  <script src="js/theme.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

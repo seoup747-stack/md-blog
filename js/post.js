@@ -105,9 +105,5 @@
     }
   }
 
-  document.addEventListener("DOMContentLoaded", function () {
-    var toggle = document.getElementById("theme-toggle");
-    if (toggle && window.MdBlogTheme) window.MdBlogTheme.initThemeToggle(toggle);
-    init();
-  });
+  document.addEventListener("DOMContentLoaded", init);
 })();
