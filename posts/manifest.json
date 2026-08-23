@@ -1,0 +1,28 @@
+{
+  "posts": [
+    {
+      "slug": "today-i-learned",
+      "title": "오늘 배운 것",
+      "date": "2026-08-23",
+      "file": "today-i-learned.md",
+      "summary": "Claude Code로 md-blog를 만들며 정리한 HTML/CSS/JavaScript 각각의 역할.",
+      "tags": ["HTML", "CSS", "JavaScript"]
+    },
+    {
+      "slug": "hello-world",
+      "title": "첫 번째 글: md-blog에 오신 것을 환영합니다",
+      "date": "2026-08-23",
+      "file": "hello-world.md",
+      "summary": "프레임워크 없이 순수 HTML/CSS/JS로 만든 마크다운 블로그를 소개합니다.",
+      "tags": ["소개", "가이드"]
+    },
+    {
+      "slug": "markdown-cheatsheet",
+      "title": "지원하는 마크다운 문법 살펴보기",
+      "date": "2026-08-20",
+      "file": "markdown-cheatsheet.md",
+      "summary": "제목, 목록, 코드블록, 인용문 등 이 파서가 지원하는 문법 예시 모음.",
+      "tags": ["가이드", "마크다운"]
+    }
+  ]
+}

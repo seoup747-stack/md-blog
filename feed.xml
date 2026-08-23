@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>md-blog</title>
+    <link>https://example.com/md-blog</link>
+    <description>마크다운으로 쓰고 정적으로 배포하는 블로그</description>
+    <language>ko</language>
+    <lastBuildDate>Sun, 23 Aug 2026 07:13:08 GMT</lastBuildDate>
+    <item>
+      <title>오늘 배운 것</title>
+      <link>https://example.com/md-blog/post.html?slug=today-i-learned</link>
+      <guid isPermaLink="false">today-i-learned</guid>
+      <pubDate>Sun, 23 Aug 2026 00:00:00 GMT</pubDate>
+      <description>Claude Code로 md-blog를 만들며 정리한 HTML/CSS/JavaScript 각각의 역할.</description>
+      <category>HTML</category>
+      <category>CSS</category>
+      <category>JavaScript</category>
+    </item>
+    <item>
+      <title>첫 번째 글: md-blog에 오신 것을 환영합니다</title>
+      <link>https://example.com/md-blog/post.html?slug=hello-world</link>
+      <guid isPermaLink="false">hello-world</guid>
+      <pubDate>Sun, 23 Aug 2026 00:00:00 GMT</pubDate>
+      <description>프레임워크 없이 순수 HTML/CSS/JS로 만든 마크다운 블로그를 소개합니다.</description>
+      <category>소개</category>
+      <category>가이드</category>
+    </item>
+    <item>
+      <title>지원하는 마크다운 문법 살펴보기</title>
+      <link>https://example.com/md-blog/post.html?slug=markdown-cheatsheet</link>
+      <guid isPermaLink="false">markdown-cheatsheet</guid>
+      <pubDate>Thu, 20 Aug 2026 00:00:00 GMT</pubDate>
+      <description>제목, 목록, 코드블록, 인용문 등 이 파서가 지원하는 문법 예시 모음.</description>
+      <category>가이드</category>
+      <category>마크다운</category>
+    </item>
+  </channel>
+</rss>
