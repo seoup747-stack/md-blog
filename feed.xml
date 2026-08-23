@@ -5,7 +5,16 @@
     <link>https://example.com/md-blog</link>
     <description>마크다운으로 쓰고 정적으로 배포하는 블로그</description>
     <language>ko</language>
-    <lastBuildDate>Sun, 23 Aug 2026 07:13:08 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 23 Aug 2026 07:46:54 GMT</lastBuildDate>
+    <item>
+      <title>개발자의 생산성을 높이는 5가지 습관</title>
+      <link>https://example.com/md-blog/post.html?slug=dev-productivity-habits</link>
+      <guid isPermaLink="false">dev-productivity-habits</guid>
+      <pubDate>Sun, 23 Aug 2026 00:00:00 GMT</pubDate>
+      <description>하루의 우선순위, 집중 시간 분리, 15분 규칙 등 반복 가능한 생산성 습관 다섯 가지.</description>
+      <category>생산성</category>
+      <category>개발</category>
+    </item>
     <item>
       <title>오늘 배운 것</title>
       <link>https://example.com/md-blog/post.html?slug=today-i-learned</link>

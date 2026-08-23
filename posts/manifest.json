@@ -1,6 +1,14 @@
 {
   "posts": [
     {
+      "slug": "dev-productivity-habits",
+      "title": "개발자의 생산성을 높이는 5가지 습관",
+      "date": "2026-08-23",
+      "file": "dev-productivity-habits.md",
+      "summary": "하루의 우선순위, 집중 시간 분리, 15분 규칙 등 반복 가능한 생산성 습관 다섯 가지.",
+      "tags": ["생산성", "개발"]
+    },
+    {
       "slug": "today-i-learned",
       "title": "오늘 배운 것",
       "date": "2026-08-23",
