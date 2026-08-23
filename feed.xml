@@ -5,7 +5,16 @@
     <link>https://example.com/md-blog</link>
     <description>마크다운으로 쓰고 정적으로 배포하는 블로그</description>
     <language>ko</language>
-    <lastBuildDate>Sun, 23 Aug 2026 07:46:54 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 23 Aug 2026 23:02:56 GMT</lastBuildDate>
+    <item>
+      <title>미국 증시 브리핑 · 2026-08-24</title>
+      <link>https://example.com/md-blog/post.html?slug=us-market-2026-08-24</link>
+      <guid isPermaLink="false">us-market-2026-08-24</guid>
+      <pubDate>Mon, 24 Aug 2026 00:00:00 GMT</pubDate>
+      <description>PMI 호조에 3대 지수 상승 마감, 이번 주는 엔비디아 실적·PCE 물가·잭슨홀 심포지엄이 변수.</description>
+      <category>미국증시</category>
+      <category>시황브리핑</category>
+    </item>
     <item>
       <title>개발자의 생산성을 높이는 5가지 습관</title>
       <link>https://example.com/md-blog/post.html?slug=dev-productivity-habits</link>
