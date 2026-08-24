@@ -5,7 +5,16 @@
     <link>https://example.com/md-blog</link>
     <description>마크다운으로 쓰고 정적으로 배포하는 블로그</description>
     <language>ko</language>
-    <lastBuildDate>Sun, 23 Aug 2026 23:02:56 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 24 Aug 2026 23:05:27 GMT</lastBuildDate>
+    <item>
+      <title>미국 증시 브리핑 · 2026-08-25</title>
+      <link>https://example.com/md-blog/post.html?slug=us-market-2026-08-25</link>
+      <guid isPermaLink="false">us-market-2026-08-25</guid>
+      <pubDate>Tue, 25 Aug 2026 00:00:00 GMT</pubDate>
+      <description>이란 제재·미-캐나다 관세 갈등에 반도체주 약세, 나스닥·S&amp;P는 하락 다우는 소폭 상승. 이번 주 엔비디아 실적·PCE·잭슨홀 심포지엄 주목.</description>
+      <category>미국증시</category>
+      <category>시황브리핑</category>
+    </item>
     <item>
       <title>미국 증시 브리핑 · 2026-08-24</title>
       <link>https://example.com/md-blog/post.html?slug=us-market-2026-08-24</link>
