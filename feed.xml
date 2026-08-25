@@ -5,7 +5,16 @@
     <link>https://example.com/md-blog</link>
     <description>마크다운으로 쓰고 정적으로 배포하는 블로그</description>
     <language>ko</language>
-    <lastBuildDate>Mon, 24 Aug 2026 23:05:27 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 25 Aug 2026 23:06:41 GMT</lastBuildDate>
+    <item>
+      <title>미국 증시 브리핑 · 2026-08-26</title>
+      <link>https://example.com/md-blog/post.html?slug=us-market-2026-08-26</link>
+      <guid isPermaLink="false">us-market-2026-08-26</guid>
+      <pubDate>Wed, 26 Aug 2026 00:00:00 GMT</pubDate>
+      <description>3대 지수 모두 상승 마감, 모더나 급등·딕스 스포팅 굿즈 급락. 오늘은 엔비디아 실적과 PCE 물가지표 발표가 최대 변수.</description>
+      <category>미국증시</category>
+      <category>시황브리핑</category>
+    </item>
     <item>
       <title>미국 증시 브리핑 · 2026-08-25</title>
       <link>https://example.com/md-blog/post.html?slug=us-market-2026-08-25</link>
