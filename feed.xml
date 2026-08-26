@@ -5,7 +5,16 @@
     <link>https://example.com/md-blog</link>
     <description>마크다운으로 쓰고 정적으로 배포하는 블로그</description>
     <language>ko</language>
-    <lastBuildDate>Tue, 25 Aug 2026 23:06:41 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 26 Aug 2026 23:04:00 GMT</lastBuildDate>
+    <item>
+      <title>미국 증시 브리핑 · 2026-08-27</title>
+      <link>https://example.com/md-blog/post.html?slug=us-market-2026-08-27</link>
+      <guid isPermaLink="false">us-market-2026-08-27</guid>
+      <pubDate>Thu, 27 Aug 2026 00:00:00 GMT</pubDate>
+      <description>인플레이션 우려 속 3대 지수 약보합 마감, 엔비디아는 실적 호조에도 시간외 하락. 오늘은 2분기 GDP 확정치·실업수당 청구건수와 베스트바이·마벨 등 실적 발표가 변수.</description>
+      <category>미국증시</category>
+      <category>시황브리핑</category>
+    </item>
     <item>
       <title>미국 증시 브리핑 · 2026-08-26</title>
       <link>https://example.com/md-blog/post.html?slug=us-market-2026-08-26</link>
