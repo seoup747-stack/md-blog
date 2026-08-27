@@ -5,7 +5,16 @@
     <link>https://example.com/md-blog</link>
     <description>마크다운으로 쓰고 정적으로 배포하는 블로그</description>
     <language>ko</language>
-    <lastBuildDate>Wed, 26 Aug 2026 23:04:00 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 27 Aug 2026 23:08:26 GMT</lastBuildDate>
+    <item>
+      <title>미국 증시 브리핑 · 2026-08-28</title>
+      <link>https://example.com/md-blog/post.html?slug=us-market-2026-08-28</link>
+      <guid isPermaLink="false">us-market-2026-08-28</guid>
+      <pubDate>Fri, 28 Aug 2026 00:00:00 GMT</pubDate>
+      <description>엔비디아 실적 서프라이즈에 나스닥 1.57% 급등, S&amp;P500·다우도 상승 마감. 오늘은 워시 연준 의장의 잭슨홀 연설과 미시간대 소비자심리지수 확정치가 최대 변수.</description>
+      <category>미국증시</category>
+      <category>시황브리핑</category>
+    </item>
     <item>
       <title>미국 증시 브리핑 · 2026-08-27</title>
       <link>https://example.com/md-blog/post.html?slug=us-market-2026-08-27</link>
