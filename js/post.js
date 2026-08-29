@@ -1,22 +1,7 @@
 /* 글 상세 페이지(post.html) 로직 */
 (function () {
-  function escapeHtml(str) {
-    return String(str)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;");
-  }
-
-  function formatDate(dateStr) {
-    var d = new Date(dateStr);
-    if (isNaN(d.getTime())) return dateStr;
-    return d.toLocaleDateString("ko-KR", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
-  }
+  var escapeHtml = window.MdBlogUtils.escapeHtml;
+  var formatDate = window.MdBlogUtils.formatDate;
 
   function renderTagBadges(post) {
     if (!post.tags || !post.tags.length) return "";

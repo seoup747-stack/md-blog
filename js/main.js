@@ -3,24 +3,8 @@
   var allPosts = [];
   var bodyCache = {}; // slug -> 소문자 원문 (검색용, 백그라운드로 채워짐)
   var state = { tag: "", query: "" };
-
-  function escapeHtml(str) {
-    return String(str)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;");
-  }
-
-  function formatDate(dateStr) {
-    var d = new Date(dateStr);
-    if (isNaN(d.getTime())) return dateStr;
-    return d.toLocaleDateString("ko-KR", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
-  }
+  var escapeHtml = window.MdBlogUtils.escapeHtml;
+  var formatDate = window.MdBlogUtils.formatDate;
 
   async function loadPosts() {
     var res = await fetch("posts/manifest.json");
