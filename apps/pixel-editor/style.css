@@ -1,0 +1,298 @@
+/* apps/pixel-editor/style.css
+   블로그 본체(css/style.css)를 import하지 않고 네온 팔레트를 자체 :root에 복제한다
+   (앱 폴더 자체 완결 원칙, spec.md 3절 — apps/2048/style.css와 동일 값). */
+
+:root {
+  --bg: #0a0a14;
+  --bg-panel: #12121f;
+  --bg-panel-alt: #16162a;
+  --text: #f2f2fa;
+  --text-secondary: #9a95b0;
+
+  --neon-cyan: #00e5ff;
+  --neon-pink: #ff2ec4;
+  --neon-purple: #b967ff;
+  --neon-green: #39ff88;
+  --neon-yellow: #fff23d;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100%;
+}
+
+body {
+  font-family: -apple-system, "Segoe UI", "Malgun Gothic", sans-serif;
+  display: flex;
+  justify-content: center;
+  padding: 24px 16px 40px;
+}
+
+.app {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+/* 헤더 */
+.app-header {
+  width: 100%;
+  text-align: center;
+}
+
+.app-title {
+  margin: 0;
+  font-family: "Courier New", Consolas, monospace;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--neon-cyan);
+  text-shadow: 0 0 10px rgba(0, 229, 255, 0.6);
+  letter-spacing: 2px;
+}
+
+/* 패널 공통 */
+.control-panel,
+.canvas-panel {
+  width: 100%;
+  background: var(--bg-panel);
+  border: 1px solid rgba(185, 103, 255, 0.25);
+  border-radius: 14px;
+  padding: 16px;
+}
+
+.control-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* 현재 색상/도구 표시 */
+.current-indicator {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.current-swatch {
+  width: 36px;
+  height: 36px;
+  flex: 0 0 auto;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background-color: #000000;
+  box-shadow: 0 0 8px rgba(0, 229, 255, 0.35);
+}
+
+.current-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-family: "Courier New", Consolas, monospace;
+}
+
+.current-color-hex {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text);
+  text-transform: uppercase;
+}
+
+.current-tool-label {
+  font-size: 0.7rem;
+  letter-spacing: 1px;
+  color: var(--text-secondary);
+}
+
+/* 팔레트 */
+.palette {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+}
+
+.palette-swatch {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 6px;
+  border: 1px solid rgba(154, 149, 176, 0.4);
+  cursor: pointer;
+  padding: 0;
+  transition: box-shadow 150ms ease, transform 100ms ease;
+}
+
+.palette-swatch:hover,
+.palette-swatch:focus-visible {
+  transform: scale(1.05);
+  outline: none;
+}
+
+.palette-swatch.selected {
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.7);
+}
+
+/* 커스텀 색상 */
+.custom-color-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.custom-color-label {
+  font-family: "Courier New", Consolas, monospace;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.custom-color-wrap input[type="color"] {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid rgba(185, 103, 255, 0.5);
+  border-radius: 8px;
+  background: var(--bg-panel-alt);
+  cursor: pointer;
+}
+
+.custom-color-wrap input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 2px;
+}
+
+.custom-color-wrap input[type="color"]::-webkit-color-swatch {
+  border: none;
+  border-radius: 5px;
+}
+
+/* 툴바 */
+.toolbar {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.tool-toggle {
+  display: flex;
+  gap: 8px;
+}
+
+.tool-btn {
+  font-family: "Courier New", Consolas, monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  background: var(--bg-panel-alt);
+  border: 1px solid rgba(154, 149, 176, 0.4);
+  border-radius: 8px;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: box-shadow 150ms ease, background 150ms ease, color 150ms ease;
+}
+
+.tool-btn.active {
+  color: var(--neon-cyan);
+  background: rgba(0, 229, 255, 0.1);
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+}
+
+.btn {
+  font-family: "Courier New", Consolas, monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+  background: var(--bg-panel-alt);
+  border-radius: 8px;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: box-shadow 150ms ease, transform 100ms ease;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn-clear {
+  color: var(--neon-pink);
+  border: 1px solid var(--neon-pink);
+}
+
+.btn-clear:hover,
+.btn-clear:focus-visible {
+  box-shadow: 0 0 10px rgba(255, 46, 196, 0.6);
+  outline: none;
+}
+
+.btn-save {
+  color: var(--neon-green);
+  border: 1px solid var(--neon-green);
+}
+
+.btn-save:hover,
+.btn-save:focus-visible {
+  box-shadow: 0 0 10px rgba(57, 255, 136, 0.6);
+  outline: none;
+}
+
+/* 캔버스 패널 */
+.canvas-panel {
+  display: flex;
+  justify-content: center;
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.15);
+}
+
+#pixel-canvas {
+  width: min(90vw, 320px);
+  height: min(90vw, 320px);
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: crosshair;
+  border-radius: 4px;
+  display: block;
+}
+
+/* 하단 안내 */
+.controls-hint {
+  margin: 0;
+  font-family: "Courier New", Consolas, monospace;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+.hint-desktop {
+  display: none;
+}
+
+.hint-mobile {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .hint-desktop {
+    display: block;
+  }
+  .hint-mobile {
+    display: none;
+  }
+}
+
+@media (min-width: 480px) {
+  .app-title {
+    font-size: 2.1rem;
+  }
+}

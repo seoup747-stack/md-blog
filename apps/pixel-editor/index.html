@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>Pixel Editor</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="app-header">
+      <h1 class="app-title">PIXEL EDITOR</h1>
+    </header>
+
+    <section class="control-panel" aria-label="색상 및 도구 설정">
+      <div class="current-indicator">
+        <div class="current-swatch" id="current-swatch"></div>
+        <div class="current-info">
+          <span class="current-color-hex" id="current-color-hex">#000000</span>
+          <span class="current-tool-label" id="current-tool-label">DRAW</span>
+        </div>
+      </div>
+
+      <div class="palette" id="palette" role="group" aria-label="색상 팔레트">
+        <button type="button" class="palette-swatch" data-color="#000000" style="background-color:#000000" aria-label="검정" title="검정"></button>
+        <button type="button" class="palette-swatch" data-color="#ffffff" style="background-color:#ffffff" aria-label="흰색" title="흰색"></button>
+        <button type="button" class="palette-swatch" data-color="#808080" style="background-color:#808080" aria-label="회색" title="회색"></button>
+        <button type="button" class="palette-swatch" data-color="#ff0000" style="background-color:#ff0000" aria-label="빨강" title="빨강"></button>
+        <button type="button" class="palette-swatch" data-color="#ff8c00" style="background-color:#ff8c00" aria-label="주황" title="주황"></button>
+        <button type="button" class="palette-swatch" data-color="#ffe000" style="background-color:#ffe000" aria-label="노랑" title="노랑"></button>
+        <button type="button" class="palette-swatch" data-color="#22c55e" style="background-color:#22c55e" aria-label="초록" title="초록"></button>
+        <button type="button" class="palette-swatch" data-color="#00e5ff" style="background-color:#00e5ff" aria-label="시안" title="시안"></button>
+        <button type="button" class="palette-swatch" data-color="#2563eb" style="background-color:#2563eb" aria-label="파랑" title="파랑"></button>
+        <button type="button" class="palette-swatch" data-color="#8b5cf6" style="background-color:#8b5cf6" aria-label="보라" title="보라"></button>
+        <button type="button" class="palette-swatch" data-color="#ff2ec4" style="background-color:#ff2ec4" aria-label="마젠타" title="마젠타"></button>
+        <button type="button" class="palette-swatch" data-color="#8b4513" style="background-color:#8b4513" aria-label="갈색" title="갈색"></button>
+      </div>
+
+      <div class="custom-color-wrap">
+        <label for="custom-color" class="custom-color-label">Custom</label>
+        <input type="color" id="custom-color" value="#000000" />
+      </div>
+    </section>
+
+    <section class="toolbar" aria-label="도구 모음">
+      <div class="tool-toggle" role="group" aria-label="도구 선택">
+        <button type="button" class="tool-btn active" id="draw-tool-btn" data-tool="draw">Draw</button>
+        <button type="button" class="tool-btn" id="eraser-tool-btn" data-tool="eraser">Eraser</button>
+      </div>
+      <button type="button" class="btn btn-clear" id="clear-btn">Clear</button>
+      <button type="button" class="btn btn-save" id="save-btn">Save PNG</button>
+    </section>
+
+    <section class="canvas-panel">
+      <canvas id="pixel-canvas" width="320" height="320"></canvas>
+    </section>
+
+    <p class="controls-hint hint-desktop">클릭 후 드래그로 칠하기</p>
+    <p class="controls-hint hint-mobile">손가락으로 문질러 칠하기</p>
+  </div>
+
+  <script src="editor.js"></script>
+</body>
+</html>
