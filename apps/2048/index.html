@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>2048 - md-blog</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="app-header">
+      <h1 class="app-title">2048</h1>
+      <div class="header-controls">
+        <div class="score-board">
+          <div class="score-box">
+            <span class="score-label">SCORE</span>
+            <span class="score-value" id="score">0</span>
+          </div>
+          <div class="score-box">
+            <span class="score-label">BEST</span>
+            <span class="score-value" id="best">0</span>
+          </div>
+        </div>
+        <button type="button" id="new-game-btn" class="btn">새 게임</button>
+      </div>
+    </header>
+
+    <main class="board-wrap">
+      <div id="board" class="board">
+        <div class="grid-cells">
+          <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+          <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+          <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+          <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+        </div>
+        <div id="tile-layer" class="tile-layer"></div>
+
+        <div id="game-over-overlay" class="overlay" style="display:none">
+          <div class="overlay-content">
+            <p class="overlay-title">GAME OVER</p>
+            <p class="overlay-score">최종 점수: <span id="final-score">0</span></p>
+            <button type="button" id="retry-btn" class="btn btn-primary">다시 시작</button>
+          </div>
+        </div>
+
+        <div id="win-overlay" class="overlay" style="display:none">
+          <div class="overlay-content">
+            <p class="overlay-title overlay-title-win">YOU WIN! 2048 달성</p>
+            <div class="overlay-actions">
+              <button type="button" id="continue-btn" class="btn btn-primary">계속하기</button>
+              <button type="button" id="win-new-game-btn" class="btn">새 게임</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <p class="controls-hint">데스크톱: 방향키(↑↓←→)로 이동 · 모바일: 보드를 스와이프해서 이동</p>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>

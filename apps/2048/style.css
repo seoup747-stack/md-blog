@@ -1,0 +1,342 @@
+/* apps/2048/style.css
+   블로그 본체(css/style.css)를 import하지 않고 네온 팔레트를 자체 :root에 복제한다
+   (앱 폴더 자체 완결 원칙, spec.md 3절). */
+
+:root {
+  --bg: #0a0a14;
+  --bg-board: #12121f;
+  --bg-cell: #1b1a2b;
+  --text: #f2f2fa;
+  --text-secondary: #9a95b0;
+
+  --neon-cyan: #00e5ff;
+  --neon-pink: #ff2ec4;
+  --neon-purple: #b967ff;
+  --neon-green: #39ff88;
+  --neon-yellow: #fff23d;
+
+  --board-padding: 12px;
+  --cell-gap: 10px;
+  --tile-transition: 140ms ease;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100%;
+}
+
+body {
+  font-family: -apple-system, "Segoe UI", "Malgun Gothic", sans-serif;
+  display: flex;
+  justify-content: center;
+  padding: 24px 16px 40px;
+}
+
+.app {
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+/* 헤더 */
+.app-header {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.app-title {
+  margin: 0;
+  font-family: "Courier New", Consolas, monospace;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--neon-cyan);
+  text-shadow: 0 0 10px rgba(0, 229, 255, 0.6);
+  letter-spacing: 2px;
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.score-board {
+  display: flex;
+  gap: 8px;
+}
+
+.score-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 64px;
+  padding: 6px 12px;
+  background: var(--bg-board);
+  border: 1px solid rgba(0, 229, 255, 0.35);
+  border-radius: 8px;
+  font-family: "Courier New", Consolas, monospace;
+}
+
+.score-label {
+  font-size: 0.65rem;
+  color: var(--text-secondary);
+  letter-spacing: 1px;
+}
+
+.score-value {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* 버튼 공통 */
+.btn {
+  font-family: "Courier New", Consolas, monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--neon-pink);
+  background: var(--bg-board);
+  border: 1px solid var(--neon-pink);
+  border-radius: 8px;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: box-shadow 150ms ease, transform 100ms ease;
+}
+
+.btn:hover,
+.btn:focus-visible {
+  box-shadow: 0 0 10px rgba(255, 46, 196, 0.6);
+  outline: none;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn-primary {
+  color: var(--neon-cyan);
+  border-color: var(--neon-cyan);
+}
+
+.btn-primary:hover,
+.btn-primary:focus-visible {
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.6);
+}
+
+/* 보드 */
+.board-wrap {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.board {
+  position: relative;
+  width: min(90vw, 420px);
+  height: min(90vw, 420px);
+  background: var(--bg-board);
+  border: 1px solid rgba(0, 229, 255, 0.4);
+  box-shadow: 0 0 24px rgba(0, 229, 255, 0.18);
+  border-radius: 14px;
+  padding: var(--board-padding);
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.grid-cells {
+  position: absolute;
+  inset: var(--board-padding);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: var(--cell-gap);
+}
+
+.cell {
+  background: var(--bg-cell);
+  border-radius: 8px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.tile-layer {
+  position: absolute;
+  inset: var(--board-padding);
+  pointer-events: none;
+}
+
+.tile {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(25% - (var(--cell-gap) * 0.75));
+  height: calc(25% - (var(--cell-gap) * 0.75));
+  transform: translate(
+    calc(var(--col, 0) * (100% + var(--cell-gap))),
+    calc(var(--row, 0) * (100% + var(--cell-gap)))
+  );
+  transition: transform var(--tile-transition);
+}
+
+.tile-inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  font-family: "Courier New", Consolas, monospace;
+  font-weight: 700;
+  font-size: clamp(1rem, 6vw, 1.7rem);
+  background: var(--bg-cell);
+  border: 1px solid transparent;
+  line-height: 1;
+}
+
+/* 값 구간별 네온 팔레트 (배경은 어둡게 유지, 글자/보더/글로우만 강조) */
+.tile-2, .tile-4 {
+  color: #eafcff;
+  border-color: rgba(224, 255, 255, 0.35);
+  box-shadow: 0 0 6px rgba(224, 255, 255, 0.25);
+}
+
+.tile-8, .tile-16 {
+  color: var(--neon-cyan);
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 8px rgba(0, 229, 255, 0.4);
+}
+
+.tile-32, .tile-64 {
+  color: var(--neon-pink);
+  border-color: var(--neon-pink);
+  box-shadow: 0 0 10px rgba(255, 46, 196, 0.45);
+}
+
+.tile-128, .tile-256 {
+  color: var(--neon-purple);
+  border-color: var(--neon-purple);
+  box-shadow: 0 0 12px rgba(185, 103, 255, 0.5);
+}
+
+.tile-512, .tile-1024 {
+  color: var(--neon-green);
+  border-color: var(--neon-green);
+  box-shadow: 0 0 14px rgba(57, 255, 136, 0.55);
+  font-size: clamp(0.85rem, 5vw, 1.5rem);
+}
+
+.tile-super {
+  color: var(--neon-yellow);
+  border-color: var(--neon-yellow);
+  box-shadow: 0 0 16px rgba(255, 242, 61, 0.6);
+  font-size: clamp(0.75rem, 4.5vw, 1.3rem);
+  animation: pulse-glow 1.6s ease-in-out infinite;
+}
+
+/* 애니메이션 */
+@keyframes tile-spawn {
+  from { transform: scale(0); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes tile-merge-pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(255, 242, 61, 0.55), 0 0 4px rgba(255, 242, 61, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(255, 242, 61, 0.85), 0 0 8px rgba(255, 242, 61, 0.6);
+  }
+}
+
+.tile-inner.spawn {
+  animation: tile-spawn 150ms ease;
+}
+
+.tile-inner.merge {
+  animation: tile-merge-pop 150ms ease;
+}
+
+/* 오버레이 */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 10, 20, 0.9);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 30;
+  text-align: center;
+  padding: 16px;
+}
+
+.overlay-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.overlay-title {
+  margin: 0;
+  font-family: "Courier New", Consolas, monospace;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--neon-pink);
+  text-shadow: 0 0 12px rgba(255, 46, 196, 0.7);
+  letter-spacing: 1px;
+}
+
+.overlay-title-win {
+  color: var(--neon-yellow);
+  text-shadow: 0 0 14px rgba(255, 242, 61, 0.8);
+}
+
+.overlay-score {
+  margin: 0;
+  font-family: "Courier New", Consolas, monospace;
+  color: var(--text);
+  font-size: 1rem;
+}
+
+.overlay-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* 하단 안내 */
+.controls-hint {
+  margin: 0;
+  font-family: "Courier New", Consolas, monospace;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+@media (min-width: 480px) {
+  .app-title {
+    font-size: 2.4rem;
+  }
+}

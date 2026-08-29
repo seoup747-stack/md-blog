@@ -200,6 +200,83 @@ footer a:hover { text-shadow: 0 0 8px var(--neon-cyan); }
 }
 
 /* ==========================================================================
+   미니 웹앱 포트폴리오
+   ========================================================================== */
+.apps-section {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+
+.section-title {
+  margin: 0 0 1.2rem;
+  font-size: 1.1rem;
+  letter-spacing: 0.04em;
+  color: var(--neon-purple);
+  text-shadow: 0 0 12px color-mix(in srgb, var(--neon-purple) 55%, transparent);
+}
+
+.app-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.4rem;
+}
+
+.app-card {
+  display: block;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+  background: linear-gradient(160deg, var(--bg-elevated), var(--bg-secondary));
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.app-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--neon-purple);
+  box-shadow: 0 0 0 1px var(--neon-purple), 0 12px 32px rgba(0, 0, 0, 0.55),
+    0 0 24px color-mix(in srgb, var(--neon-purple) 45%, transparent);
+}
+
+.app-preview {
+  position: relative;
+  height: 180px;
+  overflow: hidden;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+
+.app-preview iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 400%;
+  height: 400%;
+  border: none;
+  transform: scale(0.25);
+  transform-origin: top left;
+  pointer-events: none; /* 미리보기 전용 — 클릭은 카드 링크로 처리 */
+}
+
+.app-card-body {
+  padding: 1rem 1.2rem 1.2rem;
+}
+
+.app-card-body h3 {
+  margin: 0 0 0.4rem;
+  font-size: 1.05rem;
+  color: var(--text);
+}
+
+.app-card-body p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+}
+
+/* ==========================================================================
    툴바 (검색 + 태그 필터)
    ========================================================================== */
 .toolbar {
