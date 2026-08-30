@@ -5,7 +5,16 @@
     <link>https://example.com/md-blog</link>
     <description>마크다운으로 쓰고 정적으로 배포하는 블로그</description>
     <language>ko</language>
-    <lastBuildDate>Sat, 29 Aug 2026 10:42:40 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 30 Aug 2026 23:05:21 GMT</lastBuildDate>
+    <item>
+      <title>미국 증시 브리핑 · 2026-08-31</title>
+      <link>https://example.com/md-blog/post.html?slug=us-market-2026-08-31</link>
+      <guid isPermaLink="false">us-market-2026-08-31</guid>
+      <pubDate>Mon, 31 Aug 2026 00:00:00 GMT</pubDate>
+      <description>워시 연준 의장의 잭슨홀 발언에 9월 금리 인상 베팅 급등, 3대 지수 금요일 하락에도 주간 기준 상승 마감. 이번 주는 브로드컴 실적과 8월 고용보고서가 최대 변수.</description>
+      <category>미국증시</category>
+      <category>시황브리핑</category>
+    </item>
     <item>
       <title>미국 증시 브리핑 · 2026-08-29</title>
       <link>https://example.com/md-blog/post.html?slug=us-market-2026-08-29</link>
