@@ -5,7 +5,16 @@
     <link>https://example.com/md-blog</link>
     <description>마크다운으로 쓰고 정적으로 배포하는 블로그</description>
     <language>ko</language>
-    <lastBuildDate>Sun, 30 Aug 2026 23:05:21 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 31 Aug 2026 23:04:50 GMT</lastBuildDate>
+    <item>
+      <title>미국 증시 브리핑 · 2026-09-01</title>
+      <link>https://example.com/md-blog/post.html?slug=us-market-2026-09-01</link>
+      <guid isPermaLink="false">us-market-2026-09-01</guid>
+      <pubDate>Tue, 01 Sep 2026 00:00:00 GMT</pubDate>
+      <description>미군의 이란 라라크섬 타격에 유가 급등, 3대 지수 하락에도 8월 전체로는 2021년 이후 최고 성과. 오늘은 JOLTS 발표와 이번 주 후반 8월 고용보고서가 최대 변수.</description>
+      <category>미국증시</category>
+      <category>시황브리핑</category>
+    </item>
     <item>
       <title>미국 증시 브리핑 · 2026-08-31</title>
       <link>https://example.com/md-blog/post.html?slug=us-market-2026-08-31</link>
