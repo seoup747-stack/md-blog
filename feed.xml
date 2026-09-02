@@ -5,7 +5,16 @@
     <link>https://example.com/md-blog</link>
     <description>마크다운으로 쓰고 정적으로 배포하는 블로그</description>
     <language>ko</language>
-    <lastBuildDate>Tue, 01 Sep 2026 23:07:14 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 02 Sep 2026 23:04:33 GMT</lastBuildDate>
+    <item>
+      <title>미국 증시 브리핑 · 2026-09-03</title>
+      <link>https://example.com/md-blog/post.html?slug=us-market-2026-09-03</link>
+      <guid isPermaLink="false">us-market-2026-09-03</guid>
+      <pubDate>Thu, 03 Sep 2026 00:00:00 GMT</pubDate>
+      <description>국채금리 상승세 숨고르기에 3대 지수 3거래일 만에 반등, 브로드컴은 실적 서프라이즈. 오늘은 브로드컴 실적 반응과 ISM 서비스업 PMI가 최대 변수.</description>
+      <category>미국증시</category>
+      <category>시황브리핑</category>
+    </item>
     <item>
       <title>미국 증시 브리핑 · 2026-09-02</title>
       <link>https://example.com/md-blog/post.html?slug=us-market-2026-09-02</link>
