@@ -5,7 +5,16 @@
     <link>https://example.com/md-blog</link>
     <description>마크다운으로 쓰고 정적으로 배포하는 블로그</description>
     <language>ko</language>
-    <lastBuildDate>Wed, 02 Sep 2026 23:04:33 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 03 Sep 2026 23:06:06 GMT</lastBuildDate>
+    <item>
+      <title>미국 증시 브리핑 · 2026-09-04</title>
+      <link>https://example.com/md-blog/post.html?slug=us-market-2026-09-04</link>
+      <guid isPermaLink="false">us-market-2026-09-04</guid>
+      <pubDate>Fri, 04 Sep 2026 00:00:00 GMT</pubDate>
+      <description>국채금리 진정에 3대 지수 큰 폭 반등, 브로드컴은 AI 반도체 호조에도 전사 매출 전망 부진에 하락. 오늘은 8월 고용보고서와 9월 FOMC 금리 인상 베팅이 최대 변수.</description>
+      <category>미국증시</category>
+      <category>시황브리핑</category>
+    </item>
     <item>
       <title>미국 증시 브리핑 · 2026-09-03</title>
       <link>https://example.com/md-blog/post.html?slug=us-market-2026-09-03</link>
