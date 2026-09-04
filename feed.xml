@@ -5,7 +5,16 @@
     <link>https://example.com/md-blog</link>
     <description>마크다운으로 쓰고 정적으로 배포하는 블로그</description>
     <language>ko</language>
-    <lastBuildDate>Thu, 03 Sep 2026 23:06:06 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 04 Sep 2026 23:04:18 GMT</lastBuildDate>
+    <item>
+      <title>미국 증시 브리핑 · 2026-09-05</title>
+      <link>https://example.com/md-blog/post.html?slug=us-market-2026-09-05</link>
+      <guid isPermaLink="false">us-market-2026-09-05</guid>
+      <pubDate>Sat, 05 Sep 2026 00:00:00 GMT</pubDate>
+      <description>예상 웃돈 8월 고용지표에 금리 인상 경계감 커지며 3대 지수 하락, 룰루레몬은 실적 부진에 17%대 폭락. 다음 주 월요일은 노동절 휴장, PPI·CPI 발표가 최대 변수.</description>
+      <category>미국증시</category>
+      <category>시황브리핑</category>
+    </item>
     <item>
       <title>미국 증시 브리핑 · 2026-09-04</title>
       <link>https://example.com/md-blog/post.html?slug=us-market-2026-09-04</link>
