@@ -5,7 +5,16 @@
     <link>https://example.com/md-blog</link>
     <description>마크다운으로 쓰고 정적으로 배포하는 블로그</description>
     <language>ko</language>
-    <lastBuildDate>Sat, 05 Sep 2026 23:06:06 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 06 Sep 2026 23:04:57 GMT</lastBuildDate>
+    <item>
+      <title>미국 증시 브리핑 · 2026-09-07</title>
+      <link>https://example.com/md-blog/post.html?slug=us-market-2026-09-07</link>
+      <guid isPermaLink="false">us-market-2026-09-07</guid>
+      <pubDate>Mon, 07 Sep 2026 00:00:00 GMT</pubDate>
+      <description>노동절 휴장으로 9월 4일(금) 마감 데이터 유지, 잭슨홀 발언發 9월 금리 인상 경계감 지속. 화요일 개장 후 NFIB·소비자신용 지표, 목·금 PPI·CPI 발표가 관건.</description>
+      <category>미국증시</category>
+      <category>시황브리핑</category>
+    </item>
     <item>
       <title>미국 증시 브리핑 · 2026-09-06</title>
       <link>https://example.com/md-blog/post.html?slug=us-market-2026-09-06</link>
