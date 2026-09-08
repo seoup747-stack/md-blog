@@ -5,7 +5,16 @@
     <link>https://example.com/md-blog</link>
     <description>마크다운으로 쓰고 정적으로 배포하는 블로그</description>
     <language>ko</language>
-    <lastBuildDate>Mon, 07 Sep 2026 23:05:25 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 08 Sep 2026 23:04:41 GMT</lastBuildDate>
+    <item>
+      <title>미국 증시 브리핑 · 2026-09-09</title>
+      <link>https://example.com/md-blog/post.html?slug=us-market-2026-09-09</link>
+      <guid isPermaLink="false">us-market-2026-09-09</guid>
+      <pubDate>Wed, 09 Sep 2026 00:00:00 GMT</pubDate>
+      <description>중동 긴장·유가 급등에 3대 지수 하락, 인텔은 퀄컴·아마존 AI 반도체 협력 소식에 9%대 급등. 목·금 PPI·CPI 발표를 앞두고 FOMC 블랙아웃 기간 진행 중.</description>
+      <category>미국증시</category>
+      <category>시황브리핑</category>
+    </item>
     <item>
       <title>미국 증시 브리핑 · 2026-09-08</title>
       <link>https://example.com/md-blog/post.html?slug=us-market-2026-09-08</link>
