@@ -5,7 +5,16 @@
     <link>https://example.com/md-blog</link>
     <description>마크다운으로 쓰고 정적으로 배포하는 블로그</description>
     <language>ko</language>
-    <lastBuildDate>Tue, 08 Sep 2026 23:04:41 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 09 Sep 2026 23:04:38 GMT</lastBuildDate>
+    <item>
+      <title>미국 증시 브리핑 · 2026-09-10</title>
+      <link>https://example.com/md-blog/post.html?slug=us-market-2026-09-10</link>
+      <guid isPermaLink="false">us-market-2026-09-10</guid>
+      <pubDate>Thu, 10 Sep 2026 00:00:00 GMT</pubDate>
+      <description>재무부 국채 바이백 확대에 금리 급등, 유가도 배럴당 100달러 돌파하며 3대 지수 3거래일 연속 하락. 오늘 PPI 발표와 어도비 실적 발표가 관건.</description>
+      <category>미국증시</category>
+      <category>시황브리핑</category>
+    </item>
     <item>
       <title>미국 증시 브리핑 · 2026-09-09</title>
       <link>https://example.com/md-blog/post.html?slug=us-market-2026-09-09</link>
