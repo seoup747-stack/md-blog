@@ -5,7 +5,16 @@
     <link>https://example.com/md-blog</link>
     <description>마크다운으로 쓰고 정적으로 배포하는 블로그</description>
     <language>ko</language>
-    <lastBuildDate>Thu, 10 Sep 2026 23:05:37 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 11 Sep 2026 23:04:07 GMT</lastBuildDate>
+    <item>
+      <title>미국 증시 브리핑 · 2026-09-12</title>
+      <link>https://example.com/md-blog/post.html?slug=us-market-2026-09-12</link>
+      <guid isPermaLink="false">us-market-2026-09-12</guid>
+      <pubDate>Sat, 12 Sep 2026 00:00:00 GMT</pubDate>
+      <description>유가 진정에 3대 지수 4거래일 만에 반등, CPI는 예상 부합. 주말 지나 월요일 개장 후 15~16일 FOMC 회의가 최대 변수.</description>
+      <category>미국증시</category>
+      <category>시황브리핑</category>
+    </item>
     <item>
       <title>미국 증시 브리핑 · 2026-09-11</title>
       <link>https://example.com/md-blog/post.html?slug=us-market-2026-09-11</link>
