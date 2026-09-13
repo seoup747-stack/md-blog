@@ -17,7 +17,7 @@ const path = require("path");
 
 // 배포할 실제 주소로 바꿔서 사용하세요. 소스를 고치지 않고도 실행 시점에
 // MD_BLOG_SITE_URL 환경변수로 덮어쓸 수 있다 (예: 배포 파이프라인에서).
-const SITE_URL = process.env.MD_BLOG_SITE_URL || "https://example.com/md-blog";
+const SITE_URL = process.env.MD_BLOG_SITE_URL || "https://seoup747-stack.github.io/md-blog";
 const SITE_TITLE = "md-blog";
 const SITE_DESCRIPTION = "마크다운으로 쓰고 정적으로 배포하는 블로그";
 
