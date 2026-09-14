@@ -13,7 +13,7 @@
 ## 프로젝트 목표
 
 - 사용자가 `posts/` 폴더에 `.md` 파일을 넣고 `posts/manifest.json`에 등록하면, 별도 빌드 없이 브라우저에서 목록 페이지와 개별 글 페이지로 볼 수 있다.
-- 디자인은 **사이버펑크/신스웨이브 네온 테마**로 고정한다 — 검은 배경 + 시안/마젠타/퍼플 네온 컬러 포인트, 글로우 효과. 라이트/다크 토글은 없다(항상 이 테마 하나만 존재).
+- 디자인은 **사이버펑크/신스웨이브 네온 테마**다 — 검은 배경(다크) 기본 + 시안/마젠타/퍼플 네온 컬러 포인트, 글로우 효과. 블로그 본체(`index.html`/`post.html`)는 헤더의 토글 버튼으로 **라이트 모드**(같은 네온 색을 어둡게 톤다운한 버전, 밝은 배경)로 전환할 수 있고, 시스템 설정(`prefers-color-scheme`)도 자동 반영된다. `apps/{앱이름}/`의 미니 웹앱들은 토글 없이 고정 다크 네온을 유지한다(자체 완결 원칙, 별도 요청 전까지 변경하지 않음).
 - **모바일 반응형**: 작은 화면에서도 레이아웃이 깨지지 않고 터치 UI로 잘 보인다.
 
 ## 현재 구현 상태
@@ -21,7 +21,7 @@
 - `posts/manifest.json`에 블로그 글 다수 등록됨 (수동 작성 글 + `us-market-YYYY-MM-DD` 형식의 매일 자동 발행 미국 증시 브리핑 포함).
 - 목록 페이지 검색(제목/요약/태그 + 본문 백그라운드 캐시)·태그 필터·URL 쿼리 동기화(`?tag=`, `?q=`) 구현 완료.
 - 상세 페이지 렌더링, 태그 배지, XSS 이스케이프 처리 구현 완료.
-- **다크/라이트 토글 없음**: `css/style.css`의 `:root`에 네온 팔레트가 고정값으로 정의되어 있다. 과거에 있던 `js/theme.js`, FOUC 방지 인라인 스크립트, 토글 버튼은 모두 제거됨. 새로 라이트 모드를 요청받기 전까지 다시 추가하지 않는다.
+- **다크/라이트 토글 있음** (블로그 본체 한정): `css/style.css`의 `:root`가 다크 기본값이고, `@media (prefers-color-scheme: light)` + `:root[data-theme="light"]`/`:root[data-theme="dark"]`로 라이트 팔레트/명시적 선택을 오버라이드한다. `js/theme.js`가 토글 버튼(`#theme-toggle`) 클릭 시 `localStorage`(`md-blog-theme`)에 저장하고, 각 HTML `<head>`의 인라인 스크립트가 페인트 전에 그 값을 적용해 깜빡임을 막는다. 라이트 팔레트는 다크와 같은 색상을 더 어둡게/채도 낮게 조정한 버전이라(원색을 그대로 쓰면 흰 배경에서 대비 미달), `color-mix()` 기반 glow/그림자 규칙들도 값만 바뀌면 자동으로 알맞게 은은해진다 — 컴포넌트 CSS를 따로 손댈 필요 없음. `apps/`의 미니 웹앱들은 이 토글의 영향을 받지 않는다(별도 완결 스타일시트).
 - 목록 페이지는 카드 **그리드 레이아웃**(`repeat(auto-fill, minmax(280px, 1fr))`)이며, 카드마다 시안/마젠타/퍼플 네온을 순환 적용(`nth-child(3n+…)`)해 hover 시 해당 색으로 글로우.
 - 코드 문법 강조(`js/highlight.js`) — 현재 `define()` 6회 호출로 `js/ts`, `python`, `bash/sh`, `json`, `css`, `html` 6개 언어 지원. 토큰 색상은 네온 팔레트로 매핑됨(`--code-*` 변수).
 - `feed.xml`은 `tools/generate-feed.js`로 수동 생성된 정적 RSS 파일. 글 추가/수정 후 재실행 필요.
@@ -42,7 +42,9 @@ md-blog/
 │   ├── main.js         # 목록 페이지 로직 (manifest 로드, 검색, 태그 필터, 카드 렌더링)
 │   ├── post.js          # 상세 페이지 로직 (md 파일 fetch → 파싱 → 렌더링, 태그 배지)
 │   ├── markdown.js     # 마크다운 → HTML 변환 함수 (직접 구현)
-│   └── highlight.js    # 코드 문법 강조 토크나이저 (직접 구현)
+│   ├── highlight.js    # 코드 문법 강조 토크나이저 (직접 구현)
+│   ├── theme.js        # 다크/라이트 토글 로직 (블로그 본체 전용)
+│   └── utils.js        # main.js/post.js 공용 유틸(escapeHtml, formatDate)
 ├── posts/
 │   ├── manifest.json   # 글 목록 메타데이터 ({ "posts": [ {slug, title, date, file, summary, tags}, ... ] })
 │   └── *.md             # 실제 글 원본
@@ -102,10 +104,11 @@ md-blog/
 
 ## 디자인 가이드라인
 
-- **테마**: 사이버펑크/신스웨이브 네온, 라이트 모드 없이 고정. `css/style.css`의 `:root`에 정의된 CSS 커스텀 프로퍼티만 사용한다.
-  - `--bg`(딥블랙), `--bg-secondary`/`--bg-elevated`(카드·헤더용 약간 밝은 톤), `--text`(밝은 회백색 본문), `--text-secondary`(무채색 보조 텍스트)
-  - 네온 포인트: `--neon-cyan`, `--neon-pink`, `--neon-purple`, `--neon-green`, `--neon-yellow` — 헤딩/링크/hover/포커스 글로우(`text-shadow`, `box-shadow`, `filter: drop-shadow`)에 사용
-  - 새 색을 추가할 때도 반드시 `:root` 변수로 선언하고, 하드코딩된 색상값을 컴포넌트 CSS에 직접 쓰지 않는다.
+- **테마**: 사이버펑크/신스웨이브 네온, 다크 기본 + 라이트 지원(블로그 본체만). `css/style.css`의 `:root`에 정의된 CSS 커스텀 프로퍼티만 사용한다.
+  - `--bg`(배경), `--bg-secondary`/`--bg-elevated`(카드·헤더용 톤), `--text`(본문), `--text-secondary`(보조 텍스트)
+  - 네온 포인트: `--neon-cyan`, `--neon-pink`, `--neon-purple`, `--neon-green`, `--neon-yellow` — 헤딩/링크/hover/포커스 글로우(`text-shadow`, `box-shadow`, `filter: drop-shadow`)에 사용. 이 값들은 테마별로 다르다(다크=원색, 라이트=대비 확보를 위해 어둡게 조정한 버전) — `color-mix(in srgb, var(--neon-x) N%, transparent)` 형태로 glow를 만들면 테마가 바뀌어도 자동으로 알맞게 조정된다.
+  - `--grid-line-1`/`--grid-line-2`(배경 격자무늬), `--bg-glow`(배경 방사형 하이라이트), `--header-bg`(헤더 반투명 배경), `--card-shadow-ambient`(카드 hover 그림자), `--on-accent`(밝은 네온 배경 위에 얹는 어두운 글자색 — 예: 활성 태그 칩, 텍스트 선택 영역)도 테마별로 정의되어 있다.
+  - 새 색을 추가할 때도 반드시 `:root` 변수로 선언하고, 하드코딩된 색상값을 컴포넌트 CSS에 직접 쓰지 않는다. 라이트 모드에서도 자연스럽게 보이려면 하드코딩 대신 반드시 이 변수들(또는 그 `color-mix()` 조합)을 통해서만 색을 넣는다 — 그래야 `:root[data-theme="light"]`에서 값만 바꿔도 전체가 따라간다.
 - **글로우 사용 원칙**: 모든 텍스트/보더에 글로우를 남발하지 않는다. 헤딩, 링크 hover, 포커스 상태, 카드 hover처럼 상호작용/강조가 필요한 지점에만 적용해 가독성을 해치지 않는다.
 - **타이포그래피**: 본문은 시스템 폰트 스택(`-apple-system, "Segoe UI", "Malgun Gothic", sans-serif` 등) 유지, 코드/메타 정보(날짜, 태그, 검색창)는 모노스페이스 폰트로 터미널 느낌을 준다. 본문(`post-content`) 폭은 `max-width: 720px` 정도로 제한해 가독성 확보. `line-height`는 1.6~1.8.
 - **레이아웃**: Flexbox/Grid만으로 구성. 목록 페이지는 `grid-template-columns: repeat(auto-fill, minmax(280px, 1fr))` 카드 그리드. 모바일 우선(mobile-first)으로 작성하고 `@media (min-width: 768px)` 등으로 넓은 화면 스타일을 추가하는 방식을 기본으로 한다.

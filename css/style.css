@@ -1,5 +1,15 @@
 /* ==========================================================================
-   md-blog — 사이버펑크/신스웨이브 네온 테마 (고정, 라이트 모드 없음)
+   md-blog — 사이버펑크/신스웨이브 네온 테마 (다크 기본 + 라이트 지원)
+
+   기본값(:root)은 다크. 시스템이 라이트를 선호하면 자동 전환되고,
+   헤더의 토글 버튼으로 수동 선택하면 그 값이 시스템 설정보다 우선한다
+   (선택은 localStorage에 저장 — js/theme.js 참고).
+   라이트 모드에서는 네온 원색을 그대로 쓰면 흰 배경 위에서 대비가
+   부족해지므로(WCAG AA 미달), 같은 색상이지만 더 어둡고 채도를 낮춘
+   버전을 따로 정의한다 — 그 덕분에 이 색들을 재료로 하는 glow/그림자
+   (color-mix 기반)도 자동으로 "네온 발광"이 아니라 은은한 그림자처럼
+   보이게 된다. 값만 이 :root/오버라이드 블록에서 바꾸면 되고, 아래
+   컴포넌트 규칙들은 손댈 필요 없다(모두 변수만 참조하도록 되어 있음).
    ========================================================================== */
 :root {
   --bg: #0a0a14;
@@ -27,6 +37,106 @@
   --code-keyword: var(--neon-pink);
   --code-tag: var(--neon-cyan);
   --code-attr: var(--neon-purple);
+
+  /* 배경 격자무늬/방사형 하이라이트, 헤더 반투명 배경, 카드 그림자,
+     "밝은 칩 위에 얹는 어두운 글자색" — 테마별로 달라지는 그 외 값들 */
+  --grid-line-1: rgba(0, 240, 255, 0.05);
+  --grid-line-2: rgba(255, 43, 214, 0.05);
+  --bg-glow: #14142a;
+  --header-bg: rgba(10, 10, 20, 0.85);
+  --card-shadow-ambient: rgba(0, 0, 0, 0.55);
+  --on-accent: #05050c;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #f5f3fb;
+    --bg-secondary: #ffffff;
+    --bg-elevated: #ffffff;
+    --text: #1a1630;
+    --text-secondary: #675e87;
+
+    --neon-cyan: #006d85;
+    --neon-pink: #a4127f;
+    --neon-purple: #6a1fc9;
+    --neon-green: #147a41;
+    --neon-yellow: #806700;
+
+    --accent-hover: #004a58;
+    --border: rgba(124, 44, 214, 0.18);
+    --code-bg: #eeeaf8;
+    --shadow: rgba(124, 44, 214, 0.12);
+
+    --code-comment: #8b83ad;
+    --code-number: #b35900;
+
+    --grid-line-1: rgba(0, 109, 133, 0.05);
+    --grid-line-2: rgba(160, 18, 127, 0.04);
+    --bg-glow: #ffffff;
+    --header-bg: rgba(255, 255, 255, 0.85);
+    --card-shadow-ambient: rgba(90, 60, 140, 0.14);
+    --on-accent: #05030a;
+  }
+}
+
+/* 사용자가 토글로 라이트를 명시적으로 선택했을 때 (시스템 설정 무관하게 항상 승리) */
+:root[data-theme="light"] {
+  --bg: #f5f3fb;
+  --bg-secondary: #ffffff;
+  --bg-elevated: #ffffff;
+  --text: #1a1630;
+  --text-secondary: #675e87;
+
+  --neon-cyan: #006d85;
+  --neon-pink: #a4127f;
+  --neon-purple: #6a1fc9;
+  --neon-green: #147a41;
+  --neon-yellow: #806700;
+
+  --accent-hover: #004a58;
+  --border: rgba(124, 44, 214, 0.18);
+  --code-bg: #eeeaf8;
+  --shadow: rgba(124, 44, 214, 0.12);
+
+  --code-comment: #8b83ad;
+  --code-number: #b35900;
+
+  --grid-line-1: rgba(0, 109, 133, 0.05);
+  --grid-line-2: rgba(160, 18, 127, 0.04);
+  --bg-glow: #ffffff;
+  --header-bg: rgba(255, 255, 255, 0.85);
+  --card-shadow-ambient: rgba(90, 60, 140, 0.14);
+  --on-accent: #05030a;
+}
+
+/* 사용자가 토글로 다크를 명시적으로 선택했을 때 (시스템이 라이트를 선호해도 항상 승리) */
+:root[data-theme="dark"] {
+  --bg: #0a0a14;
+  --bg-secondary: #12121f;
+  --bg-elevated: #16162a;
+  --text: #e8e8f5;
+  --text-secondary: #9a94c2;
+
+  --neon-cyan: #00f0ff;
+  --neon-pink: #ff2bd6;
+  --neon-purple: #b026ff;
+  --neon-green: #39ff88;
+  --neon-yellow: #f9f002;
+
+  --accent-hover: #7cf9ff;
+  --border: rgba(0, 240, 255, 0.28);
+  --code-bg: #0c0c18;
+  --shadow: rgba(255, 43, 214, 0.25);
+
+  --code-comment: #6f6a9c;
+  --code-number: #ffb86c;
+
+  --grid-line-1: rgba(0, 240, 255, 0.05);
+  --grid-line-2: rgba(255, 43, 214, 0.05);
+  --bg-glow: #14142a;
+  --header-bg: rgba(10, 10, 20, 0.85);
+  --card-shadow-ambient: rgba(0, 0, 0, 0.55);
+  --on-accent: #05050c;
 }
 
 /* ==========================================================================
@@ -41,9 +151,9 @@ html, body {
 
 body {
   background:
-    linear-gradient(rgba(0, 240, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 43, 214, 0.05) 1px, transparent 1px),
-    radial-gradient(ellipse at top, #14142a 0%, var(--bg) 55%);
+    linear-gradient(var(--grid-line-1) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line-2) 1px, transparent 1px),
+    radial-gradient(ellipse at top, var(--bg-glow) 0%, var(--bg) 55%);
   background-size: 42px 42px, 42px 42px, 100% 100%;
   background-attachment: fixed;
   color: var(--text);
@@ -69,7 +179,7 @@ img { max-width: 100%; }
 
 ::selection {
   background: var(--neon-pink);
-  color: #0a0a14;
+  color: var(--on-accent);
 }
 
 /* ==========================================================================
@@ -83,7 +193,7 @@ img { max-width: 100%; }
   align-items: center;
   justify-content: center;
   padding: 1.1rem 1.25rem;
-  background: rgba(10, 10, 20, 0.85);
+  background: var(--header-bg);
   backdrop-filter: blur(6px);
   border-bottom: 1px solid var(--border);
   box-shadow: 0 1px 24px var(--shadow);
@@ -99,8 +209,35 @@ img { max-width: 100%; }
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.45)) drop-shadow(0 0 18px rgba(255, 43, 214, 0.3));
+  filter: drop-shadow(0 0 10px color-mix(in srgb, var(--neon-cyan) 45%, transparent))
+    drop-shadow(0 0 18px color-mix(in srgb, var(--neon-pink) 30%, transparent));
 }
+
+.theme-toggle {
+  position: absolute;
+  right: 1.25rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2.15rem;
+  height: 2.15rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--bg-secondary);
+  color: var(--text);
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
+}
+
+.theme-toggle:hover {
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--neon-cyan) 40%, transparent);
+}
+.theme-toggle:active { transform: translateY(-50%) scale(0.92); }
 
 /* ==========================================================================
    메인 컨테이너
@@ -166,7 +303,7 @@ footer a:hover { text-shadow: 0 0 8px var(--neon-cyan); }
 .post-card:hover {
   transform: translateY(-3px);
   border-color: var(--card-neon, var(--neon-cyan));
-  box-shadow: 0 0 0 1px var(--card-neon, var(--neon-cyan)), 0 12px 32px rgba(0, 0, 0, 0.55),
+  box-shadow: 0 0 0 1px var(--card-neon, var(--neon-cyan)), 0 12px 32px var(--card-shadow-ambient),
     0 0 24px color-mix(in srgb, var(--card-neon, var(--neon-cyan)) 45%, transparent);
 }
 
@@ -236,7 +373,7 @@ footer a:hover { text-shadow: 0 0 8px var(--neon-cyan); }
 .app-card:hover {
   transform: translateY(-3px);
   border-color: var(--neon-purple);
-  box-shadow: 0 0 0 1px var(--neon-purple), 0 12px 32px rgba(0, 0, 0, 0.55),
+  box-shadow: 0 0 0 1px var(--neon-purple), 0 12px 32px var(--card-shadow-ambient),
     0 0 24px color-mix(in srgb, var(--neon-purple) 45%, transparent);
 }
 
@@ -302,7 +439,7 @@ footer a:hover { text-shadow: 0 0 8px var(--neon-cyan); }
 .search-input:focus {
   outline: none;
   border-color: var(--neon-cyan);
-  box-shadow: 0 0 0 1px var(--neon-cyan), 0 0 18px rgba(0, 240, 255, 0.35);
+  box-shadow: 0 0 0 1px var(--neon-cyan), 0 0 18px color-mix(in srgb, var(--neon-cyan) 35%, transparent);
 }
 
 .tag-filter {
@@ -328,9 +465,9 @@ footer a:hover { text-shadow: 0 0 8px var(--neon-cyan); }
 .tag-chip.active {
   background: var(--neon-cyan);
   border-color: var(--neon-cyan);
-  color: #0a0a14;
+  color: var(--on-accent);
   font-weight: 700;
-  box-shadow: 0 0 16px rgba(0, 240, 255, 0.55);
+  box-shadow: 0 0 16px color-mix(in srgb, var(--neon-cyan) 55%, transparent);
 }
 
 .post-tags {
@@ -383,7 +520,7 @@ a.tag-badge:hover { border-color: var(--neon-pink); color: var(--neon-pink); }
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  filter: drop-shadow(0 0 14px rgba(255, 43, 214, 0.35));
+  filter: drop-shadow(0 0 14px color-mix(in srgb, var(--neon-pink) 35%, transparent));
 }
 
 .post-content {
@@ -398,7 +535,7 @@ a.tag-badge:hover { border-color: var(--neon-pink); color: var(--neon-pink); }
   line-height: 1.4;
   margin: 2.2rem 0 0.9rem;
   color: var(--neon-purple);
-  text-shadow: 0 0 12px rgba(176, 38, 255, 0.35);
+  text-shadow: 0 0 12px color-mix(in srgb, var(--neon-purple) 35%, transparent);
 }
 
 .post-content h1:first-child,
@@ -438,7 +575,7 @@ a.tag-badge:hover { border-color: var(--neon-pink); color: var(--neon-pink); }
   border-radius: 4px;
   overflow-x: auto;
   margin: 0 0 1.4rem;
-  box-shadow: inset 0 0 30px rgba(0, 240, 255, 0.06);
+  box-shadow: inset 0 0 30px color-mix(in srgb, var(--neon-cyan) 6%, transparent);
 }
 
 .post-content pre code {
@@ -462,7 +599,7 @@ a.tag-badge:hover { border-color: var(--neon-pink); color: var(--neon-pink); }
   margin: 1.5rem 0;
   padding: 0.4rem 1.2rem;
   border-left: 3px solid var(--neon-pink);
-  background: rgba(255, 43, 214, 0.06);
+  background: color-mix(in srgb, var(--neon-pink) 6%, transparent);
   color: var(--text-secondary);
 }
 .post-content blockquote p:last-child { margin-bottom: 0; }
