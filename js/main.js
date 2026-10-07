@@ -107,34 +107,84 @@
     );
   }
 
+  function renderCard(post) {
+    return (
+      '<a class="post-card" href="post.html?slug=' +
+      encodeURIComponent(post.slug) +
+      '">' +
+      '<div class="post-meta">' +
+      formatDate(post.date) +
+      "</div>" +
+      "<h2>" +
+      escapeHtml(post.title) +
+      "</h2>" +
+      (post.summary
+        ? '<p class="post-summary">' + escapeHtml(post.summary) + "</p>"
+        : "") +
+      renderTagBadges(post) +
+      "</a>"
+    );
+  }
+
+  // 처음 들어왔을 때(태그 "전체" + 검색어 없음) 보여줄 섹션. 매일 자동 발행되는 증시
+  // 브리핑이 목록을 뒤덮지 않도록 섹션별로 최신 글 몇 개만 보여주고, 나머지는
+  // "전체 보기"(= 해당 태그 필터)로 넘긴다.
+  var HOME_SECTIONS = [
+    { title: "미국 증시 브리핑", tag: "미국증시", limit: 3 },
+    { title: "카드뉴스", tag: "카드뉴스", limit: 3 },
+  ];
+
+  function setTag(tag) {
+    state.tag = tag;
+    writeStateToUrl();
+    renderTagChips();
+    renderList();
+    document.querySelector(".toolbar").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function renderHomeSections(container) {
+    container.className = "home-sections";
+    var html = HOME_SECTIONS.map(function (section) {
+      var all = getFilteredPosts().filter(function (post) {
+        return matchesTag(post, section.tag);
+      });
+      if (!all.length) return "";
+      return (
+        '<section class="home-section">' +
+        '<div class="home-section-head">' +
+        '<h2 class="section-title">' + escapeHtml(section.title) + "</h2>" +
+        (all.length > section.limit
+          ? '<button type="button" class="section-more" data-tag="' + escapeHtml(section.tag) + '">' +
+            "전체 보기 (" + all.length + ") →</button>"
+          : "") +
+        "</div>" +
+        '<div class="post-list">' + all.slice(0, section.limit).map(renderCard).join("") + "</div>" +
+        "</section>"
+      );
+    }).join("");
+
+    container.innerHTML = html || '<p class="empty-state">아직 글이 없습니다.</p>';
+    container.querySelectorAll(".section-more").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        setTag(btn.getAttribute("data-tag"));
+      });
+    });
+  }
+
   function renderList() {
     var container = document.getElementById("post-list");
+    if (!state.tag && !state.query) {
+      renderHomeSections(container);
+      return;
+    }
+    container.className = "post-list";
     var posts = getFilteredPosts();
     if (!posts.length) {
       container.innerHTML =
         '<p class="empty-state">조건에 맞는 글이 없습니다.</p>';
       return;
     }
-    container.innerHTML = posts
-      .map(function (post) {
-        return (
-          '<a class="post-card" href="post.html?slug=' +
-          encodeURIComponent(post.slug) +
-          '">' +
-          '<div class="post-meta">' +
-          formatDate(post.date) +
-          "</div>" +
-          "<h2>" +
-          escapeHtml(post.title) +
-          "</h2>" +
-          (post.summary
-            ? '<p class="post-summary">' + escapeHtml(post.summary) + "</p>"
-            : "") +
-          renderTagBadges(post) +
-          "</a>"
-        );
-      })
-      .join("");
+    container.innerHTML = posts.map(renderCard).join("");
   }
 
   // --- 검색용 본문 백그라운드 프리페치 ---
