@@ -27,7 +27,8 @@
   }
 
   async function loadPosts() {
-    var res = await fetch("posts/manifest.json");
+    // main.js의 loadPosts()와 같은 이유로 캐시된 예전 목록을 쓰지 않는다.
+    var res = await fetch("posts/manifest.json", { cache: "no-cache" });
     if (!res.ok) throw new Error("manifest.json을 불러오지 못했습니다.");
     var data = await res.json();
     return Array.isArray(data) ? data : data.posts || [];
@@ -65,7 +66,7 @@
     }
 
     try {
-      var res = await fetch("posts/" + post.file);
+      var res = await fetch("posts/" + post.file, { cache: "no-cache" });
       if (!res.ok) throw new Error("마크다운 파일을 불러오지 못했습니다.");
       var raw = await res.text();
       var bodyHtml = window.parseMarkdown(raw);

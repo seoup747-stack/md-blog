@@ -7,7 +7,9 @@
   var formatDate = window.MdBlogUtils.formatDate;
 
   async function loadPosts() {
-    var res = await fetch("posts/manifest.json");
+    // GitHub Pages가 max-age=600으로 내보내서, 그냥 fetch하면 새 글을 올려도 10분간
+    // 예전 목록이 보인다. no-cache는 매번 서버에 바뀌었는지만 확인(바뀐 게 없으면 304)한다.
+    var res = await fetch("posts/manifest.json", { cache: "no-cache" });
     if (!res.ok) throw new Error("manifest.json을 불러오지 못했습니다.");
     var data = await res.json();
     return Array.isArray(data) ? data : data.posts || [];
